@@ -3,26 +3,32 @@ package br.edu.ifpe.tads.imdb.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_GENERO")
-public class Genero {
+@Table(name = "TB_PREMIACAO")
+public class Premiacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "TXT_NOME")
-    private String nome;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TP_PREMIACAO")
+    private TipoPremiacao tipoPremiacao;
+    @OneToOne
+    private Filme filme;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Genero genero = (Genero) o;
+        Premiacao premiacao = (Premiacao) o;
 
-        return id.equals(genero.id);
+        return id.equals(premiacao.id);
     }
 
     @Override
     public int hashCode() {
         return id.hashCode();
     }
+
+    @Column(name = "TXT_CATEGORIA")
+    private String categoria;
 }

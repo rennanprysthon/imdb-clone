@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <TB_USUARIO
+        disc_usuario = "D"
+        dt_criacao = "2023-10-17"
+        txt_email = "sicrano@email.com"
+        txt_senha = "teste123"
+        txt_login = "sicrano"
+    />
+
+    <TB_DIRETOR
+        id_usuario="1"
+        txt_nome = "Fulano Sicraners"
+    />
+
+</dataset>

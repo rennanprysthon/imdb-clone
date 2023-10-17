@@ -3,6 +3,7 @@ package br.edu.ifpe.tads.imdb.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "TB_AVALIACAO")
@@ -21,6 +22,21 @@ public class Avaliacao {
     private Double nota;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO")
-    private LocalDate dataAvaliacao;
+    private Date dataAvaliacao;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Avaliacao avaliacao = (Avaliacao) o;
+
+        return id.equals(avaliacao.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
 

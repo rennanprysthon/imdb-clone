@@ -3,6 +3,11 @@
     <persistence-unit name="imdb" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>br.edu.ifpe.tads.imdb.entity.Usuario</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Premiacao</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Diretor</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Genero</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Avaliacao</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Filme</class>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
