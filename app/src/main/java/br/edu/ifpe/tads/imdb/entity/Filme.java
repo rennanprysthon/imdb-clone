@@ -2,11 +2,7 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "TB_FILME")
@@ -17,12 +13,21 @@ public class Filme {
     @Column(name = "TXT_TITULO")
     private String titulo;
     @Column(name = "QT_DURACAO")
-    private Long duracao;
+    private long duracao;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_LANCAMENTO")
     private Date dataLancamento;
-    @ManyToMany(cascade = CascadeType.DETACH)
-    private List<Genero> genero;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "TB_FILMES_GENEROS",
+        joinColumns = {
+            @JoinColumn(name = "ID_FILME")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "ID_GENERO")
+        }
+    )
+    private List<Genero> generos;
     @OneToOne
     private Premiacao premiacao;
     @OneToMany(
@@ -32,11 +37,17 @@ public class Filme {
     private Set<Avaliacao> avaliacoes;
     @ManyToOne
     private Diretor diretor;
+
+    @OneToMany(
+        mappedBy = "filme",
+        cascade = CascadeType.DETACH
+    )
+    private Set<Ator> atores;
     @Lob
     private byte[] poster;
     @ElementCollection
     @CollectionTable(name = "TB_CREDITO_NOME",
-            joinColumns = @JoinColumn(name = "ID_USUARIO"))
+            joinColumns = @JoinColumn(name = "ID_FILME"))
     @Column(name = "TXT_NOME_CREDITO")
     private Collection<String> nomesCreditos;
     @Override
@@ -52,5 +63,114 @@ public class Filme {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public long getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(long duracao) {
+        this.duracao = duracao;
+    }
+
+    public Date getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(Date dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
+
+    public List<Genero> getGenero() {
+        return generos;
+    }
+
+    public Premiacao getPremiacao() {
+        return premiacao;
+    }
+
+    public void setPremiacao(Premiacao premiacao) {
+        this.premiacao = premiacao;
+    }
+
+    public Set<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(Set<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public void removeAvaliacao(Avaliacao avaliacao) {
+        if (this.avaliacoes != null) {
+            this.avaliacoes.remove(avaliacao);
+        }
+    }
+
+    public void addAvaliacao(Avaliacao avaliacao) {
+        if (this.avaliacoes == null) {
+            this.avaliacoes = new HashSet<>();
+        }
+
+        this.avaliacoes.add(avaliacao);
+    }
+
+    public Diretor getDiretor() {
+        return diretor;
+    }
+
+    public void setDiretor(Diretor diretor) {
+        this.diretor = diretor;
+    }
+
+    public Set<Ator> getAtores() {
+        return atores;
+    }
+
+    public void addAtor(Ator ator) {
+        if (this.atores == null)
+            this.atores = new HashSet<>();
+
+        this.atores.add(ator);
+    }
+
+    public byte[] getPoster() {
+        return poster;
+    }
+
+    public void setPoster(byte[] poster) {
+        this.poster = poster;
+    }
+
+    public Collection<String> getNomesCreditos() {
+        return nomesCreditos;
+    }
+
+    public void setNomesCreditos(Collection<String> nomesCreditos) {
+        this.nomesCreditos = nomesCreditos;
+    }
+
+    public void addGenero(Genero genero) {
+        if (this.generos == null || this.generos.isEmpty()) {
+            this.generos = new ArrayList<>();
+        }
+
+        this.generos.add(genero);
     }
 }

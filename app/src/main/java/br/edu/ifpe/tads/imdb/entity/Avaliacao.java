@@ -13,7 +13,7 @@ public class Avaliacao {
     private Long id;
     @ManyToOne
     private Usuario usuario;
-    @ManyToOne
+   @ManyToOne
     private Filme filme;
     @Lob
     @Column(name = "TXT_RESENHA")

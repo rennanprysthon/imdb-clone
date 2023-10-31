@@ -6,11 +6,39 @@
         txt_email = "sicrano@email.com"
         txt_senha = "teste123"
         txt_login = "sicrano"
+        txt_nome = "Fulano Sicraners"
     />
 
     <TB_DIRETOR
         id_usuario="1"
-        txt_nome = "Fulano Sicraners"
     />
 
+    <TB_USUARIO
+        disc_usuario = "A"
+        dt_criacao = "1980-10-17"
+        txt_email = "vin@email.com"
+        txt_senha = "diesel123"
+        txt_login = "diesel"
+        txt_nome = "Vin Gasolina"
+    />
+
+    <TB_ATOR
+        txt_cidade_natal = "Los Santos"
+        txt_nacionalidade = "americano"
+        id_usuario="2"
+    />
+
+    <TB_FILME
+       txt_titulo = "Velozes e furiosos"
+       qt_duracao = "140"
+       dt_lancamento = "2000-01-01"
+    />
+
+    <TB_GENERO txt_nome = "Acao" />
+    <TB_GENERO txt_nome = "Aventura" />
+    <TB_GENERO txt_nome = "Comedia" />
+    <TB_GENERO txt_nome = "Musical" />
+
+    <TB_FILMES_GENEROS id_filme="1" id_genero="1" />
+    <TB_FILMES_GENEROS id_filme="1" id_genero="2" />
 </dataset>

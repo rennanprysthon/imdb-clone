@@ -2,6 +2,9 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+import java.util.Set;
+
 @Entity
 @Table(name = "TB_GENERO")
 public class Genero {
@@ -10,6 +13,9 @@ public class Genero {
     private Long id;
     @Column(name = "TXT_NOME")
     private String nome;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_FILME", referencedColumnName = "ID")
+    private Set<Filme> filmes;
 
     @Override
     public boolean equals(Object o) {
@@ -24,5 +30,21 @@ public class Genero {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

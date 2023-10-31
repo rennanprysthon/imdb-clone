@@ -5,6 +5,7 @@
         <class>br.edu.ifpe.tads.imdb.entity.Usuario</class>
         <class>br.edu.ifpe.tads.imdb.entity.Premiacao</class>
         <class>br.edu.ifpe.tads.imdb.entity.Diretor</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Ator</class>
         <class>br.edu.ifpe.tads.imdb.entity.Genero</class>
         <class>br.edu.ifpe.tads.imdb.entity.Avaliacao</class>
         <class>br.edu.ifpe.tads.imdb.entity.Filme</class>

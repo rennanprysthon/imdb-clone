@@ -4,6 +4,9 @@ package br.edu.ifpe.tads.imdb.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,7 +18,7 @@ import java.util.Objects;
     discriminatorType = DiscriminatorType.STRING,
     length = 1
 )
-public class Usuario implements Serializable {
+public abstract class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
@@ -29,6 +32,9 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CRIACAO")
     private Date dataCriacao;
+
+   @Column(name = "TXT_NOME")
+    private String nome;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,4 +90,17 @@ public class Usuario implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDataCriacaoFormatada() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return simpleDateFormat.format(this.dataCriacao);
+    }
 }
