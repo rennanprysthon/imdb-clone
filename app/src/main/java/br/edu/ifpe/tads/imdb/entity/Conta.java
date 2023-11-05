@@ -5,20 +5,18 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TB_USUARIO")
+@Table(name = "TB_CONTA")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(
-    name = "DISC_USUARIO",
+    name = "DISC_CONTA",
     discriminatorType = DiscriminatorType.STRING,
     length = 1
 )
-public abstract class Usuario implements Serializable {
+public abstract class Conta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
@@ -28,7 +26,6 @@ public abstract class Usuario implements Serializable {
     protected String senha;
     @Column(name = "TXT_EMAIL", unique = true)
     protected String email;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CRIACAO")
     private Date dataCriacao;
@@ -40,9 +37,9 @@ public abstract class Usuario implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Usuario usuario = (Usuario) o;
+        Conta conta = (Conta) o;
 
-        return Objects.equals(id, usuario.id);
+        return Objects.equals(id, conta.id);
     }
 
     public Long getId() {

@@ -2,7 +2,6 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,7 +11,7 @@ public class Avaliacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Usuario usuario;
+    private Conta conta;
    @ManyToOne
     private Filme filme;
     @Lob

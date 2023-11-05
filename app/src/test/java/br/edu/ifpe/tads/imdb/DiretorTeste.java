@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class DiretorTeste extends Teste {
 
     @Test
-    public void persistirUsuario() {
+    public void persistirDiretor() {
        Calendar c = Calendar.getInstance();
         c.set(1991, Calendar.OCTOBER, 12, 0, 0, 0);
         Diretor diretor = new Diretor();

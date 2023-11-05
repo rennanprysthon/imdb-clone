@@ -9,8 +9,8 @@ import java.util.Date;
 @Entity
 @Table(name = "TB_ATOR")
 @DiscriminatorValue(value = "A")
-@PrimaryKeyJoinColumn(name="ID_USUARIO", referencedColumnName = "ID")
-public class Ator extends Usuario implements Serializable {
+@PrimaryKeyJoinColumn(name="ID_CONTA", referencedColumnName = "ID")
+public class Ator extends Conta implements Serializable {
     @Column(name = "TXT_CIDADE_NATAL")
     private String cidadeNatal;
     @Column(name = "TXT_NACIONALIDADE")

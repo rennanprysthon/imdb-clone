@@ -8,8 +8,8 @@ import java.util.Set;
 @Entity
 @Table(name="TB_DIRETOR")
 @DiscriminatorValue(value = "D")
-@PrimaryKeyJoinColumn(name="ID_USUARIO", referencedColumnName = "ID")
-public class Diretor extends Usuario implements Serializable {
+@PrimaryKeyJoinColumn(name="ID_CONTA", referencedColumnName = "ID")
+public class Diretor extends Conta implements Serializable {
     @OneToMany
     private Set<Filme> filmes;
 

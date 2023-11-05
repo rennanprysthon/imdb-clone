@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <TB_USUARIO
-        disc_usuario = "D"
+    <TB_CONTA
+        disc_conta = "D"
         dt_criacao = "2023-10-17"
         txt_email = "sicrano@email.com"
         txt_senha = "teste123"
@@ -10,11 +10,11 @@
     />
 
     <TB_DIRETOR
-        id_usuario="1"
+        id_conta="1"
     />
 
-    <TB_USUARIO
-        disc_usuario = "A"
+    <TB_CONTA
+        disc_conta = "A"
         dt_criacao = "1980-10-17"
         txt_email = "vin@email.com"
         txt_senha = "diesel123"
@@ -25,25 +25,25 @@
     <TB_ATOR
         txt_cidade_natal = "Los Santos"
         txt_nacionalidade = "americano"
-        id_usuario="2"
+        id_conta="2"
     />
 
-    <TB_USUARIO
-            disc_usuario = "A"
-            dt_criacao = "1999-02-27"
-            txt_email = "figurante1@email.com"
-            txt_senha = "figurante1"
-            txt_login = "figurante"
-            txt_nome = "Figurante Cena 1"
+    <TB_CONTA
+				disc_conta = "A"
+				dt_criacao = "1999-02-27"
+				txt_email = "figurante1@email.com"
+				txt_senha = "figurante1"
+				txt_login = "figurante"
+				txt_nome = "Figurante Cena 1"
     />
 
     <TB_ATOR
-            txt_cidade_natal = "Brasilia"
-            txt_nacionalidade = "brasileiro"
-            id_usuario="3"
+				txt_cidade_natal = "Brasilia"
+				txt_nacionalidade = "brasileiro"
+				id_conta="3"
     />
-    <TB_USUARIO
-        disc_usuario = "D"
+    <TB_CONTA
+        disc_conta = "D"
         dt_criacao = "1946-12-18"
         txt_email = "spilberg@email.com"
         txt_senha = "shark123"
@@ -52,11 +52,11 @@
     />
 
     <TB_DIRETOR
-        id_usuario="4"
+        id_conta="4"
     />
 
-    <TB_USUARIO
-        disc_usuario = "D"
+    <TB_CONTA
+        disc_conta = "D"
         dt_criacao = "1974-04-18"
         txt_email = "wright@email.com"
         txt_senha = "wright123"
@@ -65,7 +65,7 @@
     />
 
     <TB_DIRETOR
-        id_usuario="5"
+        id_conta="5"
     />
 
     <TB_GENERO txt_nome = "Acao" />
