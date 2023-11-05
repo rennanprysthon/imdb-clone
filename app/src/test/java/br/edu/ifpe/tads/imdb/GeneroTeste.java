@@ -45,6 +45,7 @@ public class GeneroTeste extends Teste {
 
         entityManager.flush();
         entityManager.clear();
+
         genero = entityManager.find(Genero.class, 3L);
 
         assertEquals("Comedia Editado 2", genero.getNome());

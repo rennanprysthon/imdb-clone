@@ -28,6 +28,21 @@
         id_usuario="2"
     />
 
+    <TB_USUARIO
+            disc_usuario = "A"
+            dt_criacao = "1999-02-27"
+            txt_email = "figurante1@email.com"
+            txt_senha = "figurante1"
+            txt_login = "figurante"
+            txt_nome = "Figurante Cena 1"
+    />
+
+    <TB_ATOR
+            txt_cidade_natal = "Brasilia"
+            txt_nacionalidade = "brasileiro"
+            id_usuario="3"
+    />
+
     <TB_FILME
        txt_titulo = "Velozes e furiosos"
        qt_duracao = "140"

@@ -3,6 +3,7 @@ package br.edu.ifpe.tads.imdb.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -60,5 +61,11 @@ public class Ator extends Usuario implements Serializable {
 
     public void setNomeArtistico(String nomeArtistico) {
         this.nomeArtistico = nomeArtistico;
+    }
+
+    public String getDataNascimentoFormatada() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return simpleDateFormat.format(this.dataNascimento);
     }
 }
