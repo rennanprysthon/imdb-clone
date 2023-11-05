@@ -35,4 +35,42 @@ public class DiretorTeste extends Teste {
         assertEquals("sicrano@email.com", diretor.getEmail());
         assertEquals("teste123", diretor.getSenha());
     }
+
+    @Test
+    public void alterarDiretor() {
+        Diretor diretor = entityManager.find(Diretor.class, 4L);
+        diretor.setNome("Spielberg alterado");
+
+        entityManager.flush();
+
+        Diretor diretorUpdated = entityManager.find(Diretor.class, 4L);
+
+        assertEquals("Spielberg alterado", diretorUpdated.getNome());
+    }
+
+    @Test
+    public void alterarDiretorMerge() {
+        Diretor diretor = entityManager.find(Diretor.class, 4L);
+        diretor.setNome("Spielberg alterado de novo");
+
+        entityManager.clear();
+        entityManager.merge(diretor);
+        entityManager.flush();
+        entityManager.clear();
+
+        Diretor diretorUpdated = entityManager.find(Diretor.class, 4L);
+
+        assertEquals("Spielberg alterado de novo", diretorUpdated.getNome());
+    }
+
+    @Test
+    public void removeDiretor() {
+        Diretor diretor = entityManager.find(Diretor.class, 5L);
+
+        entityManager.remove(diretor);
+
+        diretor = entityManager.find(Diretor.class, 5L);
+
+        assertNull(diretor);
+    }
 }

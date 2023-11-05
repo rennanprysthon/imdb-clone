@@ -42,6 +42,31 @@
             txt_nacionalidade = "brasileiro"
             id_usuario="3"
     />
+    <TB_USUARIO
+        disc_usuario = "D"
+        dt_criacao = "1946-12-18"
+        txt_email = "spilberg@email.com"
+        txt_senha = "shark123"
+        txt_login = "spilberg"
+        txt_nome = "Steven Spielberg"
+    />
+
+    <TB_DIRETOR
+        id_usuario="4"
+    />
+
+    <TB_USUARIO
+        disc_usuario = "D"
+        dt_criacao = "1974-04-18"
+        txt_email = "wright@email.com"
+        txt_senha = "wright123"
+        txt_login = "wright"
+        txt_nome = "Edgar Howard Wright"
+    />
+
+    <TB_DIRETOR
+        id_usuario="5"
+    />
 
     <TB_FILME
        txt_titulo = "Velozes e furiosos"
