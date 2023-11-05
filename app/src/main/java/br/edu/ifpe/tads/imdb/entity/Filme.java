@@ -28,7 +28,7 @@ public class Filme {
         }
     )
     private List<Genero> generos;
-    @OneToOne
+    @OneToOne(mappedBy = "filme", cascade = CascadeType.ALL)
     private Premiacao premiacao;
     @OneToMany(
         mappedBy = "filme",
@@ -107,6 +107,7 @@ public class Filme {
 
     public void setPremiacao(Premiacao premiacao) {
         this.premiacao = premiacao;
+        this.premiacao.setFilme(this);
     }
 
     public Set<Avaliacao> getAvaliacoes() {

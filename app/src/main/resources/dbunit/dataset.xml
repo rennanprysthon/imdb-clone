@@ -68,17 +68,53 @@
         id_usuario="5"
     />
 
+    <TB_GENERO txt_nome = "Acao" />
+    <TB_GENERO txt_nome = "Aventura" />
+    <TB_GENERO txt_nome = "Comedia" />
+    <TB_GENERO txt_nome = "Musical" />
+
     <TB_FILME
        txt_titulo = "Velozes e furiosos"
        qt_duracao = "140"
        dt_lancamento = "2000-01-01"
     />
 
-    <TB_GENERO txt_nome = "Acao" />
-    <TB_GENERO txt_nome = "Aventura" />
-    <TB_GENERO txt_nome = "Comedia" />
-    <TB_GENERO txt_nome = "Musical" />
-
     <TB_FILMES_GENEROS id_filme="1" id_genero="1" />
     <TB_FILMES_GENEROS id_filme="1" id_genero="2" />
+
+    <TB_FILME
+        txt_titulo = "Velozes e furiosos part 50: o inimigo agora eh outro"
+        qt_duracao = "150"
+        dt_lancamento = "2090-01-01"
+    />
+
+    <TB_PREMIACAO
+        tp_premiacao="OSCAR"
+        txt_categoria="Melhor filme"
+        id_filme="2"
+    />
+
+    <TB_FILME
+        txt_titulo = "A volta dos que nao foram"
+        qt_duracao = "150"
+        dt_lancamento = "2091-01-01"
+    />
+
+    <TB_PREMIACAO
+        tp_premiacao="OUTRO"
+        txt_categoria="Franboeza de outro"
+        id_filme="3"
+    />
+
+    <TB_FILME
+        txt_titulo = "A volta dos que nao foram parte 2"
+        qt_duracao = "150"
+        dt_lancamento = "2091-01-01"
+    />
+
+    <TB_PREMIACAO
+        tp_premiacao="OSCAR"
+        txt_categoria="Melhor filme"
+        id_filme="4"
+    />
 </dataset>

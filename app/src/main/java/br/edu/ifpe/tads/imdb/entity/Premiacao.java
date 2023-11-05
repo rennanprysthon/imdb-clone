@@ -11,8 +11,36 @@ public class Premiacao {
     @Enumerated(EnumType.STRING)
     @Column(name = "TP_PREMIACAO")
     private TipoPremiacao tipoPremiacao;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "ID_FILME", referencedColumnName = "ID")
     private Filme filme;
+
+    @Column(name = "TXT_CATEGORIA")
+    private String categoria;
+
+    public TipoPremiacao getTipoPremiacao() {
+        return tipoPremiacao;
+    }
+
+    public void setTipoPremiacao(TipoPremiacao tipoPremiacao) {
+        this.tipoPremiacao = tipoPremiacao;
+    }
+
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -29,6 +57,4 @@ public class Premiacao {
         return id.hashCode();
     }
 
-    @Column(name = "TXT_CATEGORIA")
-    private String categoria;
 }
