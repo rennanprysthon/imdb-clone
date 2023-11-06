@@ -29,18 +29,18 @@
     />
 
     <TB_CONTA
-				disc_conta = "A"
-				dt_criacao = "1999-02-27"
-				txt_email = "figurante1@email.com"
-				txt_senha = "figurante1"
-				txt_login = "figurante"
-				txt_nome = "Figurante Cena 1"
+        disc_conta = "A"
+        dt_criacao = "1999-02-27"
+        txt_email = "figurante1@email.com"
+        txt_senha = "figurante1"
+        txt_login = "figurante"
+        txt_nome = "Figurante Cena 1"
     />
 
     <TB_ATOR
-				txt_cidade_natal = "Brasilia"
-				txt_nacionalidade = "brasileiro"
-				id_conta="3"
+        txt_cidade_natal = "Brasilia"
+        txt_nacionalidade = "brasileiro"
+        id_conta="3"
     />
     <TB_CONTA
         disc_conta = "D"
@@ -94,6 +94,19 @@
         id_conta="7"
     />
 
+    <TB_CONTA
+        disc_conta = "U"
+        dt_criacao = "2020-12-01"
+        txt_email = "usuario3@email.com"
+        txt_senha = "usuariopass"
+        txt_login = "usuario3"
+        txt_nome = "Usuario 3"
+    />
+
+    <TB_USUARIO
+        id_conta="8"
+    />
+
     <TB_GENERO txt_nome = "Acao" />
     <TB_GENERO txt_nome = "Aventura" />
     <TB_GENERO txt_nome = "Comedia" />
@@ -144,11 +157,58 @@
         id_filme="4"
     />
 
+    <TB_FILME
+        txt_titulo = "A volta dos que nao foram parte 3"
+        qt_duracao = "150"
+        dt_lancamento = "2091-01-01"
+    />
+
+    <TB_FILMES_GENEROS id_filme="5" id_genero="2" />
+
+    <TB_FILME
+        txt_titulo = "A volta dos que nao foram: o despertar "
+        qt_duracao = "120"
+        dt_lancamento = "2120-01-01"
+        id_diretor="1"
+    />
+
+    <TB_FILME_ATORES
+        id_filme="6"
+        id_ator="2"
+    />
+
+
+    <TB_FILMES_GENEROS id_filme="6" id_genero="1" />
+    <TB_FILMES_GENEROS id_filme="6" id_genero="2" />
+    <TB_FILMES_GENEROS id_filme="6" id_genero="3" />
+
+    <TB_PREMIACAO
+        tp_premiacao="OSCAR"
+        txt_categoria="Melhor filme"
+        id_filme="6"
+    />
+
     <TB_AVALIACAO
         TXT_RESENHA="Muito ruim"
         NM_NOTA="1.0"
         DT_AVALIACAO="2020-01-01"
         id_filme="1"
         id_conta="6"
+    />
+
+    <TB_AVALIACAO
+        TXT_RESENHA="Ate que foi bom"
+        NM_NOTA="3.0"
+        DT_AVALIACAO="2123-04-11"
+        id_filme="6"
+        id_conta="8"
+    />
+
+    <TB_AVALIACAO
+        TXT_RESENHA="Na verdade uma obra prima"
+        NM_NOTA="5.0"
+        DT_AVALIACAO="2123-04-12"
+        id_filme="6"
+        id_conta="8"
     />
 </dataset>

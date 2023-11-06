@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_ATOR")
@@ -20,8 +21,8 @@ public class Ator extends Conta implements Serializable {
     private Date dataNascimento;
     @Column(name = "TXT_NOME_ARTISTICO")
     private String nomeArtistico;
-    @ManyToOne
-    private Filme filme;
+    @ManyToMany
+    private Set<Filme> filme;
 
     public String getCidadeNatal() {
         return cidadeNatal;
@@ -51,12 +52,12 @@ public class Ator extends Conta implements Serializable {
         return nomeArtistico;
     }
 
-    public Filme getFilme() {
+    public Set<Filme> getFilmes() {
         return filme;
     }
 
-    public void setFilme(Filme filme) {
-        this.filme = filme;
+    public void addFilme(Filme filme) {
+        this.filme.add(filme);
     }
 
     public void setNomeArtistico(String nomeArtistico) {

@@ -17,7 +17,7 @@ public class Filme {
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_LANCAMENTO")
     private Date dataLancamento;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(
         name = "TB_FILMES_GENEROS",
         joinColumns = {
@@ -36,12 +36,20 @@ public class Filme {
         orphanRemoval = true
     )
     private Set<Avaliacao> avaliacoes;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ID_DIRETOR", referencedColumnName = "ID")
     private Diretor diretor;
 
-    @OneToMany(
-        mappedBy = "filme",
-        cascade = CascadeType.DETACH
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "TB_FILME_ATORES",
+        joinColumns = {
+            @JoinColumn(name = "ID_FILME")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "ID_ATOR")
+
+        }
     )
     private Set<Ator> atores;
     @Lob
