@@ -10,9 +10,11 @@ public class Avaliacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ID_CONTA", referencedColumnName = "ID")
     private Conta conta;
-   @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ID_FILME", referencedColumnName = "ID")
     private Filme filme;
     @Lob
     @Column(name = "TXT_RESENHA")

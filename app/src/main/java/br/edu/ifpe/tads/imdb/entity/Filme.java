@@ -31,6 +31,7 @@ public class Filme {
     @OneToOne(mappedBy = "filme", cascade = CascadeType.ALL)
     private Premiacao premiacao;
     @OneToMany(
+        cascade = CascadeType.ALL,
         mappedBy = "filme",
         orphanRemoval = true
     )
