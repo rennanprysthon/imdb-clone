@@ -1,5 +1,6 @@
-package br.edu.ifpe.tads.imdb;
+package br.edu.ifpe.tads.imdb.entity;
 
+import br.edu.ifpe.tads.imdb.Teste;
 import br.edu.ifpe.tads.imdb.entity.Genero;
 import org.junit.Test;
 import static org.junit.Assert.*;

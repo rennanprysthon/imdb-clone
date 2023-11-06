@@ -1,5 +1,6 @@
-package br.edu.ifpe.tads.imdb;
+package br.edu.ifpe.tads.imdb.entity;
 
+import br.edu.ifpe.tads.imdb.Teste;
 import br.edu.ifpe.tads.imdb.entity.Ator;
 import br.edu.ifpe.tads.imdb.entity.Diretor;
 import br.edu.ifpe.tads.imdb.entity.Filme;

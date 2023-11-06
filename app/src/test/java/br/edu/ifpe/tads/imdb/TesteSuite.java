@@ -1,5 +1,6 @@
 package br.edu.ifpe.tads.imdb;
 
+import br.edu.ifpe.tads.imdb.entity.DiretorTeste;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
