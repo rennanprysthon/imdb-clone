@@ -54,10 +54,26 @@ public class FilmeTeste extends Teste {
     @Test
     public void recuperarFilme() {
         Filme filme = entityManager.find(Filme.class, 1L);
+        Diretor diretor = entityManager.find(Diretor.class, 1L);
+        Genero genero1 = entityManager.find(Genero.class, 1L);
+        Genero genero2 = entityManager.find(Genero.class, 2L);
+        Ator ator = entityManager.find(Ator.class, 2L);
 
         assertEquals("Velozes e furiosos", filme.getTitulo());
         assertEquals(140L, filme.getDuracao());
         assertEquals(2, filme.getGenero().size());
+        assertEquals("Melhores efeitos especiais", filme.getPremiacao().getCategoria());
+        assertEquals(TipoPremiacao.OSCAR, filme.getPremiacao().getTipoPremiacao());
+        assertTrue(filme.getAtores().contains(ator));
+        assertTrue(filme.getGenero().containsAll(List.of(genero1, genero2)));
+        assertEquals(diretor, filme.getDiretor());
+        assertTrue(filme.getNomesCreditos().containsAll(
+            List.of(
+                "Fulano 1/cinegrafista",
+                "Fulano 2/cinegrafista",
+                "Fulano 3/cafezinho"
+            )
+        ));
     }
 
 
