@@ -2,6 +2,7 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -25,6 +26,54 @@ public class Avaliacao {
     @Column(name = "DT_AVALIACAO")
     private Date dataAvaliacao;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
+    public String getResenha() {
+        return resenha;
+    }
+
+    public void setResenha(String resenha) {
+        this.resenha = resenha;
+    }
+
+    public Double getNota() {
+        return nota;
+    }
+
+    public void setNota(Double nota) {
+        this.nota = nota;
+    }
+
+    public Date getDataAvaliacao() {
+        return dataAvaliacao;
+    }
+
+    public void setDataAvaliacao(Date dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,6 +87,12 @@ public class Avaliacao {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public String getDataAvaliacaoFormatada() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return simpleDateFormat.format(this.dataAvaliacao);
     }
 }
 

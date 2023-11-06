@@ -143,4 +143,12 @@
         txt_categoria="Melhor filme"
         id_filme="4"
     />
+
+    <TB_AVALIACAO
+        TXT_RESENHA="Muito ruim"
+        NM_NOTA="1.0"
+        DT_AVALIACAO="2020-01-01"
+        id_filme="1"
+        id_conta="6"
+    />
 </dataset>
