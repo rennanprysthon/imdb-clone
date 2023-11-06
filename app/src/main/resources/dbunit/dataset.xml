@@ -68,6 +68,32 @@
         id_conta="5"
     />
 
+    <TB_CONTA
+        disc_conta = "U"
+        dt_criacao = "2020-12-01"
+        txt_email = "usuario1@email.com"
+        txt_senha = "usuario123"
+        txt_login = "usuario1"
+        txt_nome = "Usuario 1"
+    />
+
+    <TB_USUARIO
+        id_conta="6"
+    />
+
+    <TB_CONTA
+        disc_conta = "U"
+        dt_criacao = "2020-12-01"
+        txt_email = "usuario2excluir@email.com"
+        txt_senha = "usuariopass"
+        txt_login = "usuario2"
+        txt_nome = "Usuario 2"
+    />
+
+    <TB_USUARIO
+        id_conta="7"
+    />
+
     <TB_GENERO txt_nome = "Acao" />
     <TB_GENERO txt_nome = "Aventura" />
     <TB_GENERO txt_nome = "Comedia" />

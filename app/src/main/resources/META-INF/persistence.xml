@@ -9,6 +9,7 @@
         <class>br.edu.ifpe.tads.imdb.entity.Genero</class>
         <class>br.edu.ifpe.tads.imdb.entity.Avaliacao</class>
         <class>br.edu.ifpe.tads.imdb.entity.Filme</class>
+        <class>br.edu.ifpe.tads.imdb.entity.Usuario</class>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
