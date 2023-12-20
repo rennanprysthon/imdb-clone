@@ -206,9 +206,10 @@ public class FilmeTeste extends Teste {
     @Test
     public void recuperaFilmesEDiretores() {
         TypedQuery<Object[]> query;
-        query = entityManager.createQuery("SELECT f.titulo, d.nome FROM Filme f LEFT JOIN Diretor d ON f.diretor = d", Object[].class);
+        query = entityManager.createQuery("SELECT d.nome, f.titulo FROM Filme f LEFT JOIN Diretor d ON f.diretor = d", Object[].class);
 
         List<Object[]> result = query.getResultList();
         assertEquals(6, result.size());
+        assertEquals("Diretor 1:Velozes e furiosos", result.get(0)[0] + ":" + result.get(0)[1]);
     }
 }

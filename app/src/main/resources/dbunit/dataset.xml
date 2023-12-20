@@ -6,7 +6,7 @@
         txt_email = "sicrano@email.com"
         txt_senha = "teste123"
         txt_login = "sicrano"
-        txt_nome = "Fulano Sicraners"
+        txt_nome = "Diretor 1"
     />
 
     <TB_DIRETOR

@@ -32,7 +32,7 @@ public class DiretorTeste extends Teste {
     public void encontrarDiretor() {
         Diretor diretor = entityManager.find(Diretor.class, 1L);
 
-        assertEquals("Fulano Sicraners", diretor.getNome());
+        assertEquals("Diretor 1", diretor.getNome());
         assertEquals("2023-10-17", diretor.getDataCriacaoFormatada());
         assertEquals("sicrano", diretor.getLogin());
         assertEquals("sicrano@email.com", diretor.getEmail());
