@@ -1,9 +1,14 @@
 package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.junit.Test;
 
+
 import static org.junit.Assert.*;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -143,5 +148,67 @@ public class FilmeTeste extends Teste {
         assertNull(premiacao);
         assertNull(avaliacao1);
         assertNull(avaliacao2);
+    }
+
+    @Test
+    public void filmeMaisAntigoEMaisNovo() {
+        Query query = entityManager.createQuery(
+                "SELECT MAX(f.dataLancamento), MIN(f.dataLancamento) FROM Filme f");
+
+        Object[] resultado = (Object[]) query.getSingleResult();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String maiorData = dateFormat.format((Date) resultado[0]);
+        String menorData = dateFormat.format((Date) resultado[1]);
+
+        assertEquals("01-01-2091", maiorData);
+        assertEquals("01-01-2000", menorData);
+    }
+
+    @Test
+    public void recuperarFilmesEMedias() {
+        TypedQuery<Object[]> query;
+        query = entityManager.createQuery(
+            "SELECT f.titulo, avg(a.nota) FROM Filme f INNER JOIN Avaliacao a ON a member of f.avaliacoes GROUP BY f.titulo", Object[].class
+        );
+        List<Object[]> filmes = query.getResultList();
+        assertEquals(2, filmes.size());
+        assertEquals("A volta dos que nao foram: o despertar:4.0", filmes.get(0)[0] + ":" + filmes.get(0)[1]);
+        assertEquals("Velozes e furiosos:1.0", filmes.get(1)[0] + ":" + filmes.get(1)[1]);
+    }
+
+   @Test
+   public void recuperarFilmesDeUmRange() {
+       TypedQuery<Filme> query = entityManager.createQuery("SELECT f FROM Filme f WHERE f.dataLancamento BETWEEN ?1 AND ?2 ORDER BY f.dataLancamento", Filme.class);
+       query.setParameter(1, getDate(2091, 0, 1));
+       query.setParameter(2, getDate(2091, 11, 30));
+
+       List<Filme> filme = query.getResultList();
+
+       assertEquals(3, filme.size());
+   }
+
+   @Test
+    public void recuperarFilmesQueTenhamMaisAvaliacoes() {
+       TypedQuery<Filme> query = entityManager.createQuery("SELECT f FROM Filme f WHERE f.avaliacoes IS NOT EMPTY", Filme.class);
+       List<Filme> filmes = query.getResultList();
+
+       assertEquals(2, filmes.size());
+   }
+
+    @Test
+    public void recuperarFilmesQueNaoTenhamAvaliacoes() {
+        TypedQuery<Filme> query = entityManager.createQuery("SELECT f FROM Filme f WHERE f.avaliacoes IS EMPTY", Filme.class);
+        List<Filme> filmes = query.getResultList();
+
+        assertEquals(4, filmes.size());
+    }
+
+    @Test
+    public void recuperaFilmesEDiretores() {
+        TypedQuery<Object[]> query;
+        query = entityManager.createQuery("SELECT f.titulo, d.nome FROM Filme f LEFT JOIN Diretor d ON f.diretor = d", Object[].class);
+
+        List<Object[]> result = query.getResultList();
+        assertEquals(6, result.size());
     }
 }

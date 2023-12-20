@@ -190,7 +190,7 @@
     <TB_FILMES_GENEROS id_filme="5" id_genero="2" />
 
     <TB_FILME
-        txt_titulo = "A volta dos que nao foram: o despertar "
+        txt_titulo = "A volta dos que nao foram: o despertar"
         qt_duracao = "120"
         dt_lancamento = "2120-01-01"
         id_diretor="1"
@@ -235,7 +235,6 @@
         id_filme="6"
         id_conta="8"
     />
-
 
     <TB_PREMIACAO
         tp_premiacao="OSCAR"

@@ -7,6 +7,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TB_GENERO")
+@NamedQueries(
+    {
+        @NamedQuery(
+            name = "Genero.FilmesPorNome",
+            query = "SELECT g.filmes FROM Genero g WHERE g.nome LIKE :nome ORDER BY g.nome"
+        )
+    }
+)
 public class Genero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

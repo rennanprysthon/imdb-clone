@@ -2,9 +2,11 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import br.edu.ifpe.tads.imdb.entity.Diretor;
+import jakarta.persistence.TypedQuery;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static org.junit.Assert.*;
 

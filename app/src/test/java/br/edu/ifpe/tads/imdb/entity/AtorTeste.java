@@ -1,11 +1,12 @@
 package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
-import br.edu.ifpe.tads.imdb.entity.Ator;
+import jakarta.persistence.TypedQuery;
 import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -84,5 +85,26 @@ public class AtorTeste extends Teste {
         ator = entityManager.find(Ator.class, 3L);
 
         assertNull(ator);
+    }
+
+    @Test
+    public void consultarAtoresSemFilmes() {
+        TypedQuery<Long> query = entityManager.createNamedQuery("Ator.SemFilmes", Long.class);
+
+        long quantidadeAtoresSemFilmes = query.getSingleResult();
+
+        assertEquals(2L, quantidadeAtoresSemFilmes);
+    }
+
+    @Test
+    public void consultarAtoresEQuantidadesDeFilmes() {
+        TypedQuery<Object[]> query;
+
+        query = entityManager.createQuery(
+        "SELECT a FROM Ator a INNER JOIN Filme f ON a.filme ", Object[].class
+        );
+
+        List<Object[]> filmes = query.getResultList();
+
     }
 }

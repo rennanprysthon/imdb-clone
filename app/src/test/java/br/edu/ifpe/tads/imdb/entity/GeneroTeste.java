@@ -2,7 +2,11 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import br.edu.ifpe.tads.imdb.entity.Genero;
+import jakarta.persistence.TypedQuery;
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class GeneroTeste extends Teste {
@@ -63,5 +67,16 @@ public class GeneroTeste extends Teste {
         assertNull(genero);
     }
 
-    // testar orphan remove no update. Remover um elemento e depois verificar depois do clear e verificar se ele sumiu
+    @Test
+    public void buscarGeneroPorNome() {
+        TypedQuery<Filme> query = entityManager.createNamedQuery(
+            "Genero.FilmesPorNome",
+            Filme.class
+        );
+
+        query.setParameter("nome", "Acao%");
+        List<Filme> filmes = query.getResultList();
+
+        assertEquals(1L, filmes.size());
+    }
 }

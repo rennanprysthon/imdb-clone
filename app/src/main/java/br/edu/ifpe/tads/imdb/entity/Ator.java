@@ -11,6 +11,14 @@ import java.util.Set;
 @Table(name = "TB_ATOR")
 @DiscriminatorValue(value = "A")
 @PrimaryKeyJoinColumn(name="ID_CONTA", referencedColumnName = "ID")
+@NamedQueries(
+    {
+        @NamedQuery(
+            name = "Ator.SemFilmes",
+            query = "SELECT count(a) FROM Ator a WHERE a.filme IS EMPTY"
+        )
+    }
+)
 public class Ator extends Conta implements Serializable {
     @Column(name = "TXT_CIDADE_NATAL")
     private String cidadeNatal;
