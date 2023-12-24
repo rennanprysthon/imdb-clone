@@ -15,7 +15,7 @@ import java.util.Set;
     {
         @NamedQuery(
             name = "Ator.SemFilmes",
-            query = "SELECT count(a) FROM Ator a WHERE a.filme IS EMPTY"
+            query = "SELECT count(a) FROM Ator a WHERE a.filmes IS EMPTY"
         )
     }
 )
@@ -29,8 +29,8 @@ public class Ator extends Conta implements Serializable {
     private Date dataNascimento;
     @Column(name = "TXT_NOME_ARTISTICO")
     private String nomeArtistico;
-    @ManyToMany
-    private Set<Filme> filme;
+    @ManyToMany(mappedBy = "atores")
+    private Set<Filme> filmes;
 
     public String getCidadeNatal() {
         return cidadeNatal;
@@ -61,11 +61,11 @@ public class Ator extends Conta implements Serializable {
     }
 
     public Set<Filme> getFilmes() {
-        return filme;
+        return filmes;
     }
 
     public void addFilme(Filme filme) {
-        this.filme.add(filme);
+        this.filmes.add(filme);
     }
 
     public void setNomeArtistico(String nomeArtistico) {

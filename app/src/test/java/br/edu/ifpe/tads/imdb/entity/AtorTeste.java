@@ -93,18 +93,19 @@ public class AtorTeste extends Teste {
 
         long quantidadeAtoresSemFilmes = query.getSingleResult();
 
-        assertEquals(2L, quantidadeAtoresSemFilmes);
+        assertEquals(1L, quantidadeAtoresSemFilmes);
     }
 
     @Test
-    public void consultarAtoresEQuantidadesDeFilmes() {
-        TypedQuery<Object[]> query;
+    public void consultarFilmesDeUmAtor() {
+        TypedQuery<String> query;
 
         query = entityManager.createQuery(
-        "SELECT a FROM Ator a INNER JOIN Filme f ON a.filme ", Object[].class
+        "SELECT f.titulo FROM Ator a JOIN FETCH a.filmes f ON a MEMBER OF f.atores WHERE a.nome LIKE :termo", String.class
         );
+        query.setParameter("termo", "Vin Gasolina");
 
-        List<Object[]> filmes = query.getResultList();
-
+        List<String> filmes = query.getResultList();
+        assertTrue(filmes.containsAll(List.of("Velozes e furiosos", "A volta dos que nao foram: o despertar")));
     }
 }

@@ -21,8 +21,7 @@ public class Genero {
     private Long id;
     @Column(name = "TXT_NOME")
     private String nome;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_FILME", referencedColumnName = "ID")
+    @ManyToMany(mappedBy = "generos")
     private Set<Filme> filmes;
 
     @Override
@@ -54,5 +53,13 @@ public class Genero {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setFilmes(Set<Filme> filmes) {
+        this.filmes = filmes;
+    }
+
+    public Set<Filme> getFilmes() {
+        return filmes;
     }
 }

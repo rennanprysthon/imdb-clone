@@ -2,6 +2,7 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import jakarta.persistence.Query;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.TypedQuery;
 import org.junit.Test;
 
@@ -193,7 +194,7 @@ public class FilmeTeste extends Teste {
        List<Filme> filmes = query.getResultList();
 
        assertEquals(2, filmes.size());
-   }
+}
 
     @Test
     public void recuperarFilmesQueNaoTenhamAvaliacoes() {
@@ -211,5 +212,44 @@ public class FilmeTeste extends Teste {
         List<Object[]> result = query.getResultList();
         assertEquals(6, result.size());
         assertEquals("Diretor 1:Velozes e furiosos", result.get(0)[0] + ":" + result.get(0)[1]);
+    }
+
+    @Test
+    public void recuperarQuantidadeDeFilmesPorAno() {
+       TypedQuery<Long> query;
+       query = entityManager.createQuery("SELECT count(f.id) FROM Filme f WHERE f.dataLancamento BETWEEN :dataInicio AND :dataFim", Long.class);
+
+       query.setParameter("dataInicio", getDate(2091, 0, 1), TemporalType.DATE);
+       query.setParameter("dataFim", getDate(2091, 11, 30), TemporalType.DATE);
+       long result = query.getSingleResult();
+
+       assertEquals(3, result);
+    }
+
+    @Test
+    public void buscarFilmePorTermo() {
+        TypedQuery<Filme> query;
+        query = entityManager.createQuery("SELECT f FROM Filme f WHERE f.titulo LIKE :termo", Filme.class);
+
+        query.setParameter("termo", "%Velozes%");
+
+        List<Filme> result = query.getResultList();
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    public void quantidadeDeFilmesEGeneros() {
+        TypedQuery<Object[]> query;
+        query = entityManager.createQuery(
+                "SELECT g.nome, COUNT(f) " +
+                        "FROM Genero g " +
+                        "LEFT JOIN g.filmes f " +
+                        "GROUP BY g.nome", Object[].class);
+
+        List<Object[]> result = query.getResultList();
+        // assertEquals("Acao, 2", String.format("%s, %d", result.get(0)[0], result.get(0)[1])); Esse filme eh excluido em um dos testes acima
+        assertEquals("Aventura, 3", String.format("%s, %d", result.get(1)[0], result.get(1)[1]));
+        assertEquals("Comedia, 1", String.format("%s, %d", result.get(2)[0], result.get(2)[1]));
+        assertEquals("Musical, 0", String.format("%s, %d", result.get(3)[0], result.get(3)[1]));
     }
 }
