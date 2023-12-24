@@ -252,4 +252,18 @@ public class FilmeTeste extends Teste {
         assertEquals("Comedia, 1", String.format("%s, %d", result.get(2)[0], result.get(2)[1]));
         assertEquals("Musical, 0", String.format("%s, %d", result.get(3)[0], result.get(3)[1]));
     }
+    @Test
+    public void buscarFilmesComMediaAcimaDe() {
+        TypedQuery<String> query;
+        query = entityManager.createQuery(
+            "SELECT a.filme.titulo FROM Avaliacao a WHERE a.filme IS NOT NULL GROUP BY a.filme.titulo HAVING AVG(a.nota) > :nota",
+            String.class
+        );
+
+        query.setParameter("nota", 3);
+
+        List<String> result = query.getResultList();
+
+        assertEquals("A volta dos que nao foram: o despertar", result.get(0));
+    }
 }

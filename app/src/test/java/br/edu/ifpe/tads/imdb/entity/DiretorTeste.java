@@ -76,4 +76,33 @@ public class DiretorTeste extends Teste {
 
         assertNull(diretor);
     }
+
+    @Test
+    public void buscarDiretorPeloEmail() {
+        TypedQuery<Diretor> query;
+
+        query = entityManager.createQuery(
+            "SELECT d FROM Diretor d WHERE d.email = :termo", Diretor.class
+        );
+        query.setParameter("termo", "spilberg@email.com");
+
+        Diretor diretor = query.getSingleResult();
+
+        assertNotNull(diretor);
+        assertTrue(diretor.getNome().contains("Steven Spielberg"));
+        assertEquals("spilberg@email.com", diretor.getEmail());
+    }
+
+    @Test
+    public void contarQuantidadeFilmesDiretor() {
+        TypedQuery<Long> query;
+
+        query = entityManager.createQuery(
+        "SELECT count(f) FROM Filme f INNER JOIN Diretor d ON f.diretor = d WHERE d.email = :termo", Long.class
+        );
+        query.setParameter("termo", "sicrano@email.com");
+
+        long result = query.getSingleResult();
+        assertEquals(6, result);
+    }
 }
