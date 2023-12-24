@@ -2,10 +2,13 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import static org.junit.Assert.*;
+
+import jakarta.persistence.TypedQuery;
 import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioTest extends Teste {
     public Date getDate(int year, int month, int day) {
@@ -82,5 +85,28 @@ public class UsuarioTest extends Teste {
         usuario = entityManager.find(Usuario.class, 7L);
 
         assertNull(usuario);
+    }
+
+    @Test
+    public void encontrarUsuariosPeloNome() {
+        TypedQuery<Usuario> query;
+        query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.login = :login", Usuario.class);
+        query.setParameter("login", "usuario1");
+
+        Usuario result = query.getSingleResult();
+        assertNotNull(result);
+        assertEquals("Usuario 1", result.getNome());
+    }
+
+    @Test
+    public void todosFilmesAvaliadosPeloUsuario() {
+        Usuario conta = entityManager.find(Usuario.class, 8L);
+        TypedQuery<String> query;
+        query = entityManager.createQuery("SELECT f.titulo FROM Filme f INNER JOIN Avaliacao a ON f = a.filme WHERE a.conta = :conta", String.class);
+        query.setParameter("conta", conta);
+
+        List<String> result = query.getResultList();
+
+        assertEquals(2, result.size());
     }
 }

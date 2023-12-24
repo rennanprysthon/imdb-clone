@@ -81,23 +81,6 @@ public class AvaliacaoTest extends Teste {
     }
 
 
-    @Test
-    public void removerAvaliacao() {
-        Avaliacao avaliacao = entityManager.find(Avaliacao.class, 1L);
-        Filme filme = entityManager.find(Filme.class, 1L);
-
-        assertEquals(1, filme.getAvaliacoes().size());
-
-        entityManager.remove(avaliacao);
-        entityManager.flush();
-        entityManager.clear();
-
-        avaliacao = entityManager.find(Avaliacao.class, 1L);
-        filme = entityManager.find(Filme.class, 1L);
-
-        assertNull(avaliacao);
-        assertEquals(0, filme.getAvaliacoes().size());
-    }
 
     @Test
     public void buscarAvaliacoesDeUmFilme() {
@@ -142,5 +125,23 @@ public class AvaliacaoTest extends Teste {
 
         double result = query.getSingleResult();
         assertEquals(4.0, result, 0);
+    }
+
+    @Test
+    public void removerAvaliacao() {
+        Avaliacao avaliacao = entityManager.find(Avaliacao.class, 1L);
+        Filme filme = entityManager.find(Filme.class, 1L);
+
+        assertEquals(1, filme.getAvaliacoes().size());
+
+        entityManager.remove(avaliacao);
+        entityManager.flush();
+        entityManager.clear();
+
+        avaliacao = entityManager.find(Avaliacao.class, 1L);
+        filme = entityManager.find(Filme.class, 1L);
+
+        assertNull(avaliacao);
+        assertEquals(0, filme.getAvaliacoes().size());
     }
 }

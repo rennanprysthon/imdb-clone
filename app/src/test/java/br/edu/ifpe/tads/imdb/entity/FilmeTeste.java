@@ -188,7 +188,7 @@ public class FilmeTeste extends Teste {
        assertEquals(3, filme.size());
    }
 
-   @Test
+    @Test
     public void recuperarFilmesQueTenhamMaisAvaliacoes() {
        TypedQuery<Filme> query = entityManager.createQuery("SELECT f FROM Filme f WHERE f.avaliacoes IS NOT EMPTY", Filme.class);
        List<Filme> filmes = query.getResultList();
@@ -237,21 +237,7 @@ public class FilmeTeste extends Teste {
         assertEquals(2, result.size());
     }
 
-    @Test
-    public void quantidadeDeFilmesEGeneros() {
-        TypedQuery<Object[]> query;
-        query = entityManager.createQuery(
-                "SELECT g.nome, COUNT(f) " +
-                        "FROM Genero g " +
-                        "LEFT JOIN g.filmes f " +
-                        "GROUP BY g.nome", Object[].class);
 
-        List<Object[]> result = query.getResultList();
-        // assertEquals("Acao, 2", String.format("%s, %d", result.get(0)[0], result.get(0)[1])); Esse filme eh excluido em um dos testes acima
-        assertEquals("Aventura, 3", String.format("%s, %d", result.get(1)[0], result.get(1)[1]));
-        assertEquals("Comedia, 1", String.format("%s, %d", result.get(2)[0], result.get(2)[1]));
-        assertEquals("Musical, 0", String.format("%s, %d", result.get(3)[0], result.get(3)[1]));
-    }
     @Test
     public void buscarFilmesComMediaAcimaDe() {
         TypedQuery<String> query;

@@ -74,9 +74,25 @@ public class GeneroTeste extends Teste {
             Filme.class
         );
 
-        query.setParameter("nome", "Acao%");
+        query.setParameter("nome", "Comedia%");
         List<Filme> filmes = query.getResultList();
 
         assertEquals(1L, filmes.size());
+    }
+
+    @Test
+    public void quantidadeDeFilmesEGeneros() {
+        TypedQuery<Object[]> query;
+        query = entityManager.createQuery(
+                "SELECT g.nome, COUNT(f) " +
+                        "FROM Genero g " +
+                        "LEFT JOIN g.filmes f " +
+                        "GROUP BY g.nome", Object[].class);
+
+        List<Object[]> result = query.getResultList();
+        assertEquals("Acao, 2", String.format("%s, %d", result.get(0)[0], result.get(0)[1]));
+        assertEquals("Aventura, 3", String.format("%s, %d", result.get(1)[0], result.get(1)[1]));
+        assertEquals("Comedia, 1", String.format("%s, %d", result.get(2)[0], result.get(2)[1]));
+        assertEquals("Musical, 0", String.format("%s, %d", result.get(3)[0], result.get(3)[1]));
     }
 }
