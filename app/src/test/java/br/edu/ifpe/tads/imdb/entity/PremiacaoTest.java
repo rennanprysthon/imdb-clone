@@ -2,6 +2,8 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import static org.junit.Assert.*;
+
+import jakarta.persistence.TypedQuery;
 import org.junit.Test;
 
 public class PremiacaoTest extends Teste {
@@ -71,5 +73,28 @@ public class PremiacaoTest extends Teste {
         premiacao = entityManager.find(Premiacao.class, 3L);
 
         assertNull(premiacao);
+    }
+
+    @Test
+    public void contarQuantosFilmesNaoTemPremiacao() {
+        TypedQuery<Long> query;
+        query = entityManager.createQuery("SELECT count(f) FROM Filme f WHERE f.avaliacoes IS EMPTY", Long.class);
+
+        long result = query.getSingleResult();
+
+        assertEquals(4L, result);
+    }
+
+    @Test
+    public void contarQuantidadeDePremiosPorFilme() {
+        Filme filme = entityManager.find(Filme.class, 6L);
+
+        TypedQuery<Long> query;
+        query = entityManager.createQuery("SELECT count(p) FROM Premiacao p WHERE p.filme = :filme", Long.class);
+        query.setParameter("filme", filme);
+
+        long result = query.getSingleResult();
+
+        assertEquals(2L, result);
     }
 }

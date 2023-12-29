@@ -108,4 +108,18 @@ public class AtorTeste extends Teste {
         List<String> filmes = query.getResultList();
         assertTrue(filmes.containsAll(List.of("Velozes e furiosos", "A volta dos que nao foram: o despertar")));
     }
+
+    @Test
+    public void consultarDadosAtor() {
+        TypedQuery<Object[]> query;
+        query = entityManager.createQuery("SELECT a.nome, count(f.id) FROM Ator a JOIN FETCH a.filmes f ON a MEMBER OF f.atores WHERE a.nome LIKE :termo GROUP BY a.nome", Object[].class);
+        query.setParameter("termo", "Vin Gasolina");
+
+        Object[] result = query.getSingleResult();
+
+        assertEquals("Vin Gasolina", result[0]);
+        assertEquals(2L, result[1]);
+        assertNotNull(result);
+    }
+
 }

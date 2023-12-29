@@ -144,4 +144,53 @@ public class AvaliacaoTest extends Teste {
         assertNull(avaliacao);
         assertEquals(0, filme.getAvaliacoes().size());
     }
+
+    @Test
+    public void menorEMaiorNotaDeUmFilme() {
+        Filme filme = entityManager.find(Filme.class, 6L);
+
+        TypedQuery<Object[]> query;
+        query = entityManager.createQuery("SELECT min(a.nota), max(a.nota) FROM Avaliacao a INNER JOIN Filme f ON a MEMBER OF f.avaliacoes WHERE f = :filme", Object[].class);
+        query.setParameter("filme", filme);
+
+        Object[] result = query.getSingleResult();
+
+        assertEquals("3.0 - 5.0", String.format("%s - %s", result[0], result[1]));
+    }
+
+    @Test
+    public void notaMaisBaixaDeUmFilme() {
+        Filme filme = entityManager.find(Filme.class, 6L);
+
+        TypedQuery<Double> query;
+        query = entityManager.createQuery("SELECT min(a.nota) FROM Avaliacao a INNER JOIN Filme f ON a MEMBER OF f.avaliacoes WHERE f = :filme", Double.class);
+        query.setParameter("filme", filme);
+
+        double result = query.getSingleResult();
+
+        assertEquals(3.0, result, 0);
+    }
+    @Test
+    public void notaMaisAltaDeUmFilme() {
+        Filme filme = entityManager.find(Filme.class, 6L);
+
+        TypedQuery<Double> query;
+        query = entityManager.createQuery("SELECT max(a.nota) FROM Avaliacao a INNER JOIN Filme f ON a MEMBER OF f.avaliacoes WHERE f = :filme", Double.class);
+        query.setParameter("filme", filme);
+
+        double result = query.getSingleResult();
+
+        assertEquals(5.0, result, 0);
+    }
+
+    @Test
+    public void encontrarFilmesSemAvaliacoes() {
+        TypedQuery<String> query;
+        query = entityManager.createQuery("SELECT f.titulo FROM Filme f WHERE f.avaliacoes IS EMPTY", String.class);
+
+        List<String> result = query.getResultList();
+        List<String> expected = List.of("Velozes e furiosos part 50: o inimigo agora eh outro", "A volta dos que nao foram", "A volta dos que nao foram parte 2", "A volta dos que nao foram parte 3");
+
+        assertTrue(expected.containsAll(result));
+    }
 }

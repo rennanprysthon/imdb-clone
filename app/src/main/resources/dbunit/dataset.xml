@@ -212,6 +212,12 @@
         id_filme="6"
     />
 
+    <TB_PREMIACAO
+        tp_premiacao="OSCAR"
+        txt_categoria="Melhores efeitos especiais"
+        id_filme="6"
+    />
+
     <TB_AVALIACAO
         TXT_RESENHA="Muito ruim"
         NM_NOTA="1.0"
