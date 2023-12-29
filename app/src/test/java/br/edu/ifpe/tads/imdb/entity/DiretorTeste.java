@@ -15,11 +15,12 @@ public class DiretorTeste extends Teste {
     @Test
     public void persistirDiretor() {
        Calendar c = Calendar.getInstance();
-        c.set(1991, Calendar.OCTOBER, 12, 0, 0, 0);
+        c.set(2024, Calendar.OCTOBER, 12, 0, 0, 0);
         Diretor diretor = new Diretor();
         diretor.setNome("Fulano");
         diretor.setEmail("fulano@email.com");
-        diretor.setSenha("batata");
+        diretor.setSenha("batata12355");
+        diretor.setLogin("fulano");
         diretor.setDataCriacao(c.getTime());
 
         entityManager.persist(diretor);

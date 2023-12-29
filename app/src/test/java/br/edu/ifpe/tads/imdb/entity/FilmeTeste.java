@@ -4,6 +4,7 @@ import br.edu.ifpe.tads.imdb.Teste;
 import jakarta.persistence.Query;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.Test;
 
 
@@ -24,19 +25,66 @@ public class FilmeTeste extends Teste {
     }
 
     @Test
-    public void persistirFilme() {
+    public void naoPodePersistirFilmeSemTitulo() {
         Ator ator = new Ator();
-        ator.setNome("Ator 1");
+        ator.setNome("Ator");
         ator.setCidadeNatal("Recife");
-        ator.setDataNascimento(getDate(1987, Calendar.OCTOBER, 1));
+        ator.setEmail("ator@email.com");
+        ator.setLogin("atormassa");
+        ator.setDataNascimento(getDate(2000, Calendar.OCTOBER, 1));
+        ator.setDataCriacao(getDate(2024, Calendar.OCTOBER, 1));
+        ator.setSenha("12345678888");
+        ator.setNomeArtistico("Ator Atoroso");
         entityManager.persist(ator);
         entityManager.flush();
 
         Diretor diretor = new Diretor();
         diretor.setNome("Fulano");
         diretor.setEmail("fulano@email.com");
-        diretor.setSenha("batata");
-        diretor.setDataCriacao(getDate(1991, Calendar.OCTOBER, 2));
+        diretor.setLogin("fulanoo");
+        diretor.setSenha("batata123456789j");
+        diretor.setDataCriacao(getDate(2024, Calendar.OCTOBER, 2));
+        entityManager.persist(diretor);
+        entityManager.flush();
+
+        Genero genero = new Genero();
+        genero.setNome("Acao");
+        entityManager.persist(genero);
+        entityManager.flush();
+
+        Filme filme = new Filme();
+        filme.addAtor(ator);
+        filme.setDuracao(20L);
+        filme.setDiretor(diretor);
+        filme.addGenero(genero);
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(filme);
+        });
+        entityManager.flush();
+
+        assertNotNull(filme.getId());
+    }
+    @Test
+    public void persistirFilme() {
+        Ator ator = new Ator();
+        ator.setNome("Ator");
+        ator.setCidadeNatal("Recife");
+        ator.setEmail("ator@email.com");
+        ator.setLogin("atormassa");
+        ator.setDataNascimento(getDate(2000, Calendar.OCTOBER, 1));
+        ator.setDataCriacao(getDate(2024, Calendar.OCTOBER, 1));
+        ator.setSenha("12345678888");
+        ator.setNomeArtistico("Ator Atoroso");
+        entityManager.persist(ator);
+        entityManager.flush();
+
+        Diretor diretor = new Diretor();
+        diretor.setNome("Fulano");
+        diretor.setEmail("fulano@email.com");
+        diretor.setLogin("fulanoo");
+        diretor.setSenha("batata123456789j");
+        diretor.setDataCriacao(getDate(2024, Calendar.OCTOBER, 2));
         entityManager.persist(diretor);
         entityManager.flush();
 

@@ -1,6 +1,7 @@
 package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.*;
 
@@ -11,6 +12,7 @@ public class Filme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "TXT_TITULO")
+    @NotBlank
     private String titulo;
     @Column(name = "QT_DURACAO")
     private long duracao;

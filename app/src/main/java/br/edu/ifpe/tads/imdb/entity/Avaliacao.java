@@ -1,6 +1,10 @@
 package br.edu.ifpe.tads.imdb.entity;
 
+import br.edu.ifpe.tads.imdb.entity.validation.ValidaNota;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,11 +23,14 @@ public class Avaliacao {
     private Filme filme;
     @Lob
     @Column(name = "TXT_RESENHA")
+    @NotBlank
     private String resenha;
     @Column(name = "NM_NOTA")
+    @ValidaNota
     private Double nota;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO")
+    @Future
     private Date dataAvaliacao;
 
     public Long getId() {

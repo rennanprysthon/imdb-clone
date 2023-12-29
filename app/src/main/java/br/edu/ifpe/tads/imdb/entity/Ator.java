@@ -1,6 +1,8 @@
 package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -26,8 +28,10 @@ public class Ator extends Conta implements Serializable {
     private String nacionalidade;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO")
+    @Past
     private Date dataNascimento;
     @Column(name = "TXT_NOME_ARTISTICO")
+    @NotBlank(message = "Informe o nome")
     private String nomeArtistico;
     @ManyToMany(mappedBy = "atores")
     private Set<Filme> filmes;

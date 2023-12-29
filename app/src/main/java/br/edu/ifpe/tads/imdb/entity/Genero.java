@@ -1,6 +1,7 @@
 package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Collection;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class Genero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "TXT_NOME")
+    @NotBlank
     private String nome;
     @ManyToMany(mappedBy = "generos")
     private Set<Filme> filmes;

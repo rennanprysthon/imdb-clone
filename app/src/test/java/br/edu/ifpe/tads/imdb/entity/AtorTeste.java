@@ -2,6 +2,7 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -17,12 +18,37 @@ public class AtorTeste extends Teste {
 
         return c.getTime();
     }
+
+    @Test
+    public void naoPermitePersistirAtorSemNomeArtistico() {
+        Ator ator = new Ator();
+
+        ator.setNome("Vin");
+        ator.setNomeArtistico("");
+        ator.setEmail("vingasosa@email.com");
+        ator.setLogin("vingasolina");
+        ator.setSenha("12345678911");
+        ator.setDataCriacao(getDate(2024, Calendar.JANUARY, 2));
+        ator.setCidadeNatal("Americano");
+        ator.setDataNascimento(getDate(1991, Calendar.OCTOBER, 12));
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(ator);
+        });
+        entityManager.flush();
+
+        assertNotNull(ator.getId());
+    }
     @Test
     public void persistirAtor() {
         Ator ator = new Ator();
 
-        ator.setNome("Vin Gasolina");
-        ator.setEmail("vin@diesel.com");
+        ator.setNome("Vin");
+        ator.setNomeArtistico("Vin Diesel");
+        ator.setEmail("vingasosa@email.com");
+        ator.setLogin("vingasolina");
+        ator.setSenha("12345678911");
+        ator.setDataCriacao(getDate(2024, Calendar.JANUARY, 2));
         ator.setCidadeNatal("Americano");
         ator.setDataNascimento(getDate(1991, Calendar.OCTOBER, 12));
 

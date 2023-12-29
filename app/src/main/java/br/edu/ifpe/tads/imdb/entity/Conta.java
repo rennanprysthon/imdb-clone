@@ -2,6 +2,7 @@ package br.edu.ifpe.tads.imdb.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -21,16 +22,22 @@ public abstract class Conta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     @Column(name = "TXT_LOGIN")
+    @NotNull
     protected String login;
     @Column(name = "TXT_SENHA")
+    @NotNull
+    @Size(min = 10)
     protected String senha;
     @Column(name = "TXT_EMAIL", unique = true)
+    @Email
     protected String email;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CRIACAO")
+    @Future
     private Date dataCriacao;
 
-   @Column(name = "TXT_NOME")
+    @Column(name = "TXT_NOME")
+    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "Informe um nome valido")
     private String nome;
     @Override
     public boolean equals(Object o) {

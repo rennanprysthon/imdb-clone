@@ -2,6 +2,7 @@ package br.edu.ifpe.tads.imdb.entity;
 
 import br.edu.ifpe.tads.imdb.Teste;
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +20,44 @@ public class AvaliacaoTest extends Teste {
         return c.getTime();
     }
     @Test
+    public void naoDeixaInserirNotaErrada() {
+        Filme filme = entityManager.find(Filme.class, 2L);
+        Usuario usuario = entityManager.find(Usuario.class, 6L);
+
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setNota(Double.valueOf("6.0"));
+        avaliacao.setResenha("Avaliacao invalida");
+        avaliacao.setFilme(filme);
+        avaliacao.setDataAvaliacao(getDate(2024, 10, 1));
+        avaliacao.setConta(usuario);
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(avaliacao);
+        });
+
+        entityManager.flush();
+    }
+
+    @Test
+    public void naoDeixaInserirSemResenha() {
+        Filme filme = entityManager.find(Filme.class, 2L);
+        Usuario usuario = entityManager.find(Usuario.class, 6L);
+
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setNota(Double.valueOf("4.0"));
+        avaliacao.setResenha("");
+        avaliacao.setFilme(filme);
+        avaliacao.setDataAvaliacao(getDate(2024, 10, 1));
+        avaliacao.setConta(usuario);
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(avaliacao);
+        });
+
+        entityManager.flush();
+    }
+
+    @Test
     public void inserirAvaliacao() {
         Filme filme = entityManager.find(Filme.class, 2L );
         Usuario usuario = entityManager.find(Usuario.class, 6L);
@@ -26,7 +65,7 @@ public class AvaliacaoTest extends Teste {
         Avaliacao avaliacao = new Avaliacao();
         avaliacao.setResenha("Bom demais. Obra prima");
         avaliacao.setNota(Double.valueOf("5.0"));
-        avaliacao.setDataAvaliacao(getDate(2023, 10, 1));
+        avaliacao.setDataAvaliacao(getDate(2024, 10, 1));
         avaliacao.setFilme(filme);
         avaliacao.setConta(usuario);
 

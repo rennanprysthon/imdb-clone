@@ -4,6 +4,7 @@ import br.edu.ifpe.tads.imdb.Teste;
 import static org.junit.Assert.*;
 
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -23,9 +24,9 @@ public class UsuarioTest extends Teste {
         Usuario usuario = new Usuario();
         usuario.setEmail("usuario@email.com");
         usuario.setNome("Usuario");
-        usuario.setDataCriacao(getDate(2023, 1, 1));
+        usuario.setDataCriacao(getDate(2024, 1, 1));
         usuario.setLogin("usuariologin");
-        usuario.setSenha("lala1234");
+        usuario.setSenha("lala123456");
 
         entityManager.persist(usuario);
         entityManager.flush();
@@ -33,6 +34,35 @@ public class UsuarioTest extends Teste {
         assertNotNull(usuario.getId());
     }
 
+    @Test
+    public void naoDeixaPersistirUsuarioComDataAntiga() {
+        Usuario usuario = new Usuario();
+        usuario.setEmail("usuario@email.com");
+        usuario.setNome("Usuario");
+        usuario.setDataCriacao(getDate(2023, 1, 1));
+        usuario.setLogin("usuariologin");
+        usuario.setSenha("lala1234567");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(usuario);
+        });
+        entityManager.flush();
+    }
+
+    @Test
+    public void naoDeixaPersistirUsuarioComSenhaCurta() {
+        Usuario usuario = new Usuario();
+        usuario.setEmail("usuario@email.com");
+        usuario.setNome("Usuario");
+        usuario.setDataCriacao(getDate(2024, 1, 1));
+        usuario.setLogin("usuariologin");
+        usuario.setSenha("a");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(usuario);
+        });
+        entityManager.flush();
+    }
     @Test
     public void encontrarUsuario() {
        Usuario usuario = entityManager.find(Usuario.class, 6L);

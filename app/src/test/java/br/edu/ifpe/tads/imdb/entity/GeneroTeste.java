@@ -3,6 +3,7 @@ package br.edu.ifpe.tads.imdb.entity;
 import br.edu.ifpe.tads.imdb.Teste;
 import br.edu.ifpe.tads.imdb.entity.Genero;
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,6 +11,19 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class GeneroTeste extends Teste {
+    @Test
+    public void naoPermitePersistirGeneroSemNome() {
+        Genero genero = new Genero();
+        genero.setNome("");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(genero);
+        });
+
+        entityManager.flush();
+
+        assertNotNull(genero.getId());
+    }
     @Test
     public void persistirGenero() {
         Genero genero = new Genero();

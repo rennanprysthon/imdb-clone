@@ -4,9 +4,23 @@ import br.edu.ifpe.tads.imdb.Teste;
 import static org.junit.Assert.*;
 
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.Test;
 
 public class PremiacaoTest extends Teste {
+    @Test
+    public void naoPermitePersistirPremiacaoSemTipoPremiacaoECategoria() {
+        Filme filme = entityManager.find(Filme.class, 1L);
+
+        Premiacao premiacao = new Premiacao();
+        premiacao.setCategoria("");
+
+        filme.setPremiacao(premiacao);
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            entityManager.persist(premiacao);
+        });
+    }
 
     @Test
     public void persistirPremiacao() {

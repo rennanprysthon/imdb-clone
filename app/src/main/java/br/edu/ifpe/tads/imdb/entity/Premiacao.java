@@ -1,6 +1,8 @@
 package br.edu.ifpe.tads.imdb.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TB_PREMIACAO")
@@ -10,12 +12,14 @@ public class Premiacao {
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "TP_PREMIACAO")
+    @NotNull
     private TipoPremiacao tipoPremiacao;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "ID_FILME", referencedColumnName = "ID")
     private Filme filme;
 
     @Column(name = "TXT_CATEGORIA")
+    @NotBlank
     private String categoria;
 
     public TipoPremiacao getTipoPremiacao() {
